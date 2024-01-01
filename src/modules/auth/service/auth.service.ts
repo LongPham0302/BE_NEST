@@ -21,18 +21,22 @@ export class AuthService {
       ...registerInput,
       password: hashString(registerInput.password),
     };
-    this.usersService.create(userInput)
+    const user = await this.usersService.create(userInput)
     const token = this.makeJwtToken(payload);
     return {
-      token: token
+      token: token,
+      status: 200,
+      userId: user._id
     }
   }
 
-  async login(loginInput: LoginUserInput) {
-    const payload = { email: loginInput.email, password: loginInput.password };
+  async login(loginInput: LoginUserInput, id: string) {
+    const payload = { email: loginInput.email, password: loginInput.password, userId: id };
     const token = this.makeJwtToken(payload)
     return {
-      token: token
+      token: token,
+      status: 200,
+      userId: id
     }
   }
   makeJwtToken(tokenData: any) {

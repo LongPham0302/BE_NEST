@@ -32,8 +32,6 @@ export class UserMutationResolver {
         }
 
         if (!validateDateOfBirth(dateOfBirth)) {
-            console.log("dateOfBirth",dateOfBirth);
-            
             throw new UserError(
                 'DateOfBird invalidate',
                 StatusCodes.DATE_OF_BIRD_INVALIDATE,

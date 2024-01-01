@@ -14,17 +14,7 @@ export const isValidBase64 = (str) => {
         if (str == '') {
             return true; // Cho phép trống nếu str là null hoặc undefined
         }
-        if (!str.startsWith('data:image/') || !str.includes(';base64,')) {
-            return false;
-        }
-
-        const firstChar = str.charAt(str.indexOf(';base64,') + ';base64,'.length);
-        if (firstChar !== '/' && firstChar !== '+') {
-            return false;
-        }
-
-        const padding = str.endsWith('==') ? 2 : (str.endsWith('=') ? 1 : 0);
-        return (str.length - str.indexOf(';base64,') - ';base64,'.length - padding) % 4 === 0;
+        return str.startsWith('data:image/jpeg;base64,');
     } catch (error) {
         return false;
     }
@@ -48,7 +38,8 @@ export const validatePassword = (str) => {
     return str.length >= 1;
 }
 
-export const validateDateOfBirth = (dateString: string, format: string = 'YYYY-MM-DD'): boolean => {
+export const validateDateOfBirth = (dateString: string, format: string = 'YYYY/MM/DD'): boolean => {
+    if (dateString == '') return true
     return moment(dateString, format, true).isValid();
 }
 

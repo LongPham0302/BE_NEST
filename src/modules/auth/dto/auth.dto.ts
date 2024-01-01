@@ -4,4 +4,11 @@ import { Field, ObjectType } from "@nestjs/graphql";
 export class JWT {
     @Field()
     token: string;
+
+    @Field()
+    status: number;
+    
+    @Field()
+    userId: string;
+    
 }

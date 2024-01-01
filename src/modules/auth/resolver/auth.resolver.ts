@@ -88,7 +88,7 @@ export class AuthResolver {
         if (!comparePassword(password, user.password))
             throw new UserError('Password is invalid!', StatusCodes.INVALID_PASSWORD);
 
-        return this.authService.login(user);
+        return this.authService.login(loginInput,user._id);
     }
 
 }
